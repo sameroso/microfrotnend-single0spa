@@ -1,0 +1,33 @@
+version: '3.7'
+
+networks:
+  develop_net:
+    driver: bridge
+
+services:
+
+  root:
+    container_name: root
+    image: micro-front-root:latest
+    ports:
+    - "9000:80"
+    networks:
+    - develop_net
+
+  mf-1:
+    container_name: mf-1
+    image: micro-front-1:latest
+    ports:
+    - "3000:80"
+    networks:
+    - develop_net
+    environment:
+    - ASSET_PATH=http://localhost:3000/
+
+  mf-2:
+    container_name: mf-2
+    image: micro-front-2:latest
+    ports:
+    - "8080:80"
+    networks:
+    - develop_net
